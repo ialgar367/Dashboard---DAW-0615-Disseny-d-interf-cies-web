@@ -87,7 +87,9 @@ if (path !== undefined) {
 <style scoped>
 /* Custom Menu Styling */
 .custom-menu {
-  --width: 280px;
+  --width: 20%;
+  --min-width: 200px;
+  --max-width: 280px;
 }
 
 .menu-content {
