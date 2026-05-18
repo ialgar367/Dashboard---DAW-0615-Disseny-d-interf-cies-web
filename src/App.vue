@@ -90,6 +90,14 @@ if (path !== undefined) {
   --width: 20%;
   --min-width: 200px;
   --max-width: 280px;
+  --border: none;
+}
+
+ion-split-pane {
+  --border: none;
+  --side-width: 20%;
+  --side-min-width: 200px;
+  --side-max-width: 280px;
 }
 
 .menu-content {

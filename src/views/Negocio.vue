@@ -14,46 +14,58 @@
         <!-- Header con métricas rápidas -->
         <div class="quick-stats">
           <div class="stat-card stat-primary">
+            <div class="stat-content">
+              <span class="stat-label">CLICS</span>
+              <span class="stat-value">1234</span>
+              <div class="mini-chart">
+                <canvas ref="miniChart1"></canvas>
+              </div>
+            </div>
             <div class="stat-icon">
               <ion-icon :icon="trendingUpOutline"></ion-icon>
             </div>
-            <div class="stat-info">
-              <span class="stat-label">Ventas Totales</span>
-              <span class="stat-value">€45,230</span>
-            </div>
           </div>
-          <div class="stat-card stat-success">
+          <div class="stat-card stat-info">
+            <div class="stat-content">
+              <span class="stat-label">VISTAS</span>
+              <span class="stat-value">1982</span>
+              <div class="mini-chart">
+                <canvas ref="miniChart2"></canvas>
+              </div>
+            </div>
             <div class="stat-icon">
-              <ion-icon :icon="peopleOutline"></ion-icon>
-            </div>
-            <div class="stat-info">
-              <span class="stat-label">Nuevos Clientes</span>
-              <span class="stat-value">1,234</span>
+              <ion-icon :icon="eyeOutline"></ion-icon>
             </div>
           </div>
-          <div class="stat-card stat-warning">
+          <div class="stat-card stat-danger">
+            <div class="stat-content">
+              <span class="stat-label">VENTAS</span>
+              <span class="stat-value">2011</span>
+              <div class="mini-chart">
+                <canvas ref="miniChart3"></canvas>
+              </div>
+            </div>
             <div class="stat-icon">
               <ion-icon :icon="cartOutline"></ion-icon>
             </div>
-            <div class="stat-info">
-              <span class="stat-label">Pedidos Activos</span>
-              <span class="stat-value">89</span>
-            </div>
           </div>
-          <div class="stat-card stat-info">
-            <div class="stat-icon">
-              <ion-icon :icon="statsChartOutline"></ion-icon>
+          <div class="stat-card stat-success">
+            <div class="stat-content">
+              <span class="stat-label">INGRESOS</span>
+              <span class="stat-value">627K€</span>
+              <div class="mini-chart">
+                <canvas ref="miniChart4"></canvas>
+              </div>
             </div>
-            <div class="stat-info">
-              <span class="stat-label">Conversión</span>
-              <span class="stat-value">23.4%</span>
+            <div class="stat-icon">
+              <ion-icon :icon="cashOutline"></ion-icon>
             </div>
           </div>
         </div>
 
-        <!-- Fila principal con gráficos grandes -->
-        <div class="row row-main">
-          <div class="chart-card chart-large">
+        <!-- Gráfico principal grande -->
+        <div class="main-chart">
+          <div class="chart-card">
             <div class="card-header">
               <h3>Ventas por Mes</h3>
               <ion-badge color="success">+12.5%</ion-badge>
@@ -62,18 +74,10 @@
               <canvas ref="salesChartRef"></canvas>
             </div>
           </div>
-          <div class="chart-card">
-            <div class="card-header">
-              <h3>Categorías Top</h3>
-            </div>
-            <div class="chart-surface">
-              <div ref="categoriesEchartRef" class="chart-host"></div>
-            </div>
-          </div>
         </div>
 
-        <!-- Fila secundaria -->
-        <div class="row row-secondary">
+        <!-- Grid de gráficos secundarios -->
+        <div class="secondary-grid">
           <div class="chart-card">
             <div class="card-header">
               <h3>Ingresos vs Gastos</h3>
@@ -82,6 +86,25 @@
               <div ref="incomeApexRef" class="chart-host"></div>
             </div>
           </div>
+          
+          <div class="chart-card">
+            <div class="card-header">
+              <h3>Categorías Top</h3>
+            </div>
+            <div class="chart-surface">
+              <div ref="categoriesEchartRef" class="chart-host"></div>
+            </div>
+          </div>
+          
+          <div class="chart-card">
+            <div class="card-header">
+              <h3>Conversión</h3>
+            </div>
+            <div class="chart-surface">
+              <div ref="conversionGaugeRef" class="chart-host"></div>
+            </div>
+          </div>
+          
           <div class="chart-card">
             <div class="card-header">
               <h3>Usuarios Activos</h3>
@@ -111,9 +134,9 @@ import {
 } from '@ionic/vue';
 import { 
   trendingUpOutline,
-  peopleOutline,
+  eyeOutline,
   cartOutline,
-  statsChartOutline
+  cashOutline
 } from 'ionicons/icons';
 import {
   Chart,
@@ -129,11 +152,21 @@ const salesChartRef = ref<HTMLCanvasElement | null>(null);
 const usersChartRef = ref<HTMLCanvasElement | null>(null);
 const incomeApexRef = ref<HTMLDivElement | null>(null);
 const categoriesEchartRef = ref<HTMLDivElement | null>(null);
+const conversionGaugeRef = ref<HTMLDivElement | null>(null);
+const miniChart1 = ref<HTMLCanvasElement | null>(null);
+const miniChart2 = ref<HTMLCanvasElement | null>(null);
+const miniChart3 = ref<HTMLCanvasElement | null>(null);
+const miniChart4 = ref<HTMLCanvasElement | null>(null);
 
 let salesChart: Chart | null = null;
 let usersChart: Chart | null = null;
 let incomeApexChart: ApexCharts | null = null;
 let categoriesEchart: echarts.ECharts | null = null;
+let conversionGauge: echarts.ECharts | null = null;
+let mini1: Chart | null = null;
+let mini2: Chart | null = null;
+let mini3: Chart | null = null;
+let mini4: Chart | null = null;
 
 const buildSalesChart = () => {
   if (!salesChartRef.value) return;
@@ -227,7 +260,7 @@ const buildIncomeApex = async () => {
   incomeApexChart = new ApexCharts(incomeApexRef.value, {
     chart: {
       type: 'bar',
-      height: '100%',
+      height: 220,
       toolbar: { show: false },
       fontFamily: 'inherit',
     },
@@ -279,17 +312,21 @@ const buildCategoriesEchart = () => {
       trigger: 'item',
     },
     legend: {
-      bottom: 0,
+      bottom: -5,
       left: 'center',
       textStyle: {
         color: '#666',
+        fontSize: 11
       },
+      itemGap: 10,
+      padding: [10, 0, 0, 0]
     },
     series: [
       {
         name: 'Categorías',
         type: 'pie',
-        radius: ['45%', '72%'],
+        radius: ['40%', '65%'],
+        center: ['50%', '45%'],
         avoidLabelOverlap: false,
         label: {
           show: false,
@@ -312,8 +349,126 @@ const buildCategoriesEchart = () => {
   });
 };
 
+const buildConversionGauge = () => {
+  if (!conversionGaugeRef.value) return;
+
+  conversionGauge = echarts.init(conversionGaugeRef.value);
+  conversionGauge.setOption({
+    series: [
+      {
+        type: 'gauge',
+        startAngle: 180,
+        endAngle: 0,
+        min: 0,
+        max: 100,
+        splitNumber: 4,
+        radius: '90%',
+        center: ['50%', '75%'],
+        axisLine: {
+          lineStyle: {
+            width: 20,
+            color: [
+              [0.3, '#EF5350'],
+              [0.7, '#FFB74D'],
+              [1, '#6CB65C']
+            ]
+          }
+        },
+        pointer: {
+          width: 4,
+          length: '65%',
+          itemStyle: {
+            color: '#333'
+          }
+        },
+        axisTick: {
+          distance: -20,
+          length: 8,
+          lineStyle: {
+            color: '#fff',
+            width: 2
+          }
+        },
+        splitLine: {
+          distance: -20,
+          length: 14,
+          lineStyle: {
+            color: '#fff',
+            width: 3
+          }
+        },
+        axisLabel: {
+          distance: 30,
+          color: '#999',
+          fontSize: 12,
+          formatter: (value: number) => value + '%'
+        },
+        detail: {
+          valueAnimation: true,
+          formatter: '{value}%',
+          color: '#333',
+          fontSize: 32,
+          fontWeight: 'bold',
+          offsetCenter: [0, '40%']
+        },
+        title: {
+          show: true,
+          offsetCenter: [0, '15%'],
+          fontSize: 14,
+          color: '#666',
+          fontWeight: 'normal'
+        },
+        data: [
+          {
+            value: 70,
+            name: 'Conversión'
+          }
+        ]
+      }
+    ]
+  });
+};
+
+const buildMiniCharts = () => {
+  const miniConfig = (canvas: HTMLCanvasElement, data: number[], color: string, bgColor: string) => {
+    return new Chart(canvas, {
+      type: 'line',
+      data: {
+        labels: ['', '', '', '', '', ''],
+        datasets: [{
+          data: data,
+          borderColor: color,
+          backgroundColor: bgColor,
+          borderWidth: 2,
+          fill: true,
+          tension: 0.4,
+          pointRadius: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { enabled: false }
+        },
+        scales: {
+          x: { display: false },
+          y: { display: false }
+        }
+      }
+    });
+  };
+
+  if (miniChart1.value) mini1 = miniConfig(miniChart1.value, [20, 35, 28, 42, 38, 50], '#2196F3', 'rgba(33, 150, 243, 0.1)');
+  if (miniChart2.value) mini2 = miniConfig(miniChart2.value, [15, 25, 20, 32, 28, 35], '#9C27B0', 'rgba(156, 39, 176, 0.1)');
+  if (miniChart3.value) mini3 = miniConfig(miniChart3.value, [25, 40, 35, 50, 45, 60], '#FF5722', 'rgba(255, 87, 34, 0.1)');
+  if (miniChart4.value) mini4 = miniConfig(miniChart4.value, [30, 45, 40, 55, 50, 65], '#4CAF50', 'rgba(76, 175, 80, 0.1)');
+};
+
 const resizeCharts = () => {
   categoriesEchart?.resize();
+  conversionGauge?.resize();
   incomeApexChart?.updateOptions({}, true, true);
 };
 
@@ -322,6 +477,8 @@ onMounted(async () => {
   buildUsersChart();
   await buildIncomeApex();
   buildCategoriesEchart();
+  buildConversionGauge();
+  buildMiniCharts();
   window.addEventListener('resize', resizeCharts);
 });
 
@@ -330,7 +487,12 @@ onBeforeUnmount(() => {
   salesChart?.destroy();
   usersChart?.destroy();
   categoriesEchart?.dispose();
+  conversionGauge?.dispose();
   incomeApexChart?.destroy();
+  mini1?.destroy();
+  mini2?.destroy();
+  mini3?.destroy();
+  mini4?.destroy();
 });
 </script>
 
@@ -366,8 +528,9 @@ onBeforeUnmount(() => {
 }
 
 .dashboard-container {
-  padding: 24px;
-  max-width: 1400px;
+  padding: 20px;
+  width: 100%;
+  max-width: 1600px;
   margin: 0 auto;
 }
 
@@ -375,295 +538,203 @@ onBeforeUnmount(() => {
 .quick-stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin-bottom: 24px;
+  gap: 16px;
+  margin-bottom: 20px;
 }
 
 .stat-card {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.stat-icon {
-  width: 56px;
-  height: 56px;
   border-radius: 12px;
+  padding: 20px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: 28px;
+  position: relative;
+  overflow: hidden;
+  min-height: 120px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.stat-primary .stat-icon {
-  background: linear-gradient(135deg, #6CB65C 0%, #5a9e4c 100%);
-  color: #ffffff;
+.stat-card.stat-primary {
+  border-left: 4px solid #2196F3;
 }
 
-.stat-success .stat-icon {
-  background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
-  color: #ffffff;
+.stat-card.stat-info {
+  border-left: 4px solid #9C27B0;
 }
 
-.stat-warning .stat-icon {
-  background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
-  color: #ffffff;
+.stat-card.stat-danger {
+  border-left: 4px solid #FF5722;
 }
 
-.stat-info .stat-icon {
-  background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
-  color: #ffffff;
+.stat-card.stat-success {
+  border-left: 4px solid #4CAF50;
 }
 
-.stat-info {
+.stat-content {
   display: flex;
   flex-direction: column;
+  gap: 8px;
+  z-index: 2;
 }
 
 .stat-label {
-  font-size: 13px;
-  color: #999999;
-  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #666666;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .stat-value {
-  font-size: 22px;
+  font-size: 32px;
   font-weight: 700;
   color: #333333;
+  line-height: 1;
+}
+
+.stat-icon {
+  font-size: 40px;
+  color: #e0e0e0;
+  z-index: 1;
+}
+
+.stat-card.stat-primary .stat-icon {
+  color: rgba(33, 150, 243, 0.2);
+}
+
+.stat-card.stat-info .stat-icon {
+  color: rgba(156, 39, 176, 0.2);
+}
+
+.stat-card.stat-danger .stat-icon {
+  color: rgba(255, 87, 34, 0.2);
+}
+
+.stat-card.stat-success .stat-icon {
+  color: rgba(76, 175, 80, 0.2);
+}
+
+.mini-chart {
+  width: 100%;
+  height: 35px;
+  margin-top: 4px;
+}
+
+.mini-chart canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Main Chart */
+.main-chart {
+  margin-bottom: 20px;
+}
+
+.main-chart .chart-card {
+  min-height: 350px;
+}
+
+/* Secondary Grid */
+.secondary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.secondary-grid .chart-card {
+  min-height: 280px;
 }
 
 /* Chart Cards */
-.row {
-  display: grid;
-  gap: 20px;
-  margin-bottom: 24px;
-}
-
-.row-main {
-  grid-template-columns: 2fr 1fr;
-}
-
-.row-secondary {
-  grid-template-columns: 1fr 1fr;
-}
-
 .chart-card {
   background: #ffffff;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  transition: box-shadow 0.2s ease;
-}
-
-.chart-card:hover {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.chart-large {
-  min-height: 380px;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .card-header h3 {
   margin: 0;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 600;
   color: #333333;
 }
 
 .chart-surface {
-  background: #f5f5f5;
-  border-radius: 12px;
-  min-height: 280px;
-  border: 1px solid #e7ece9;
-  padding: 12px;
+  background: transparent;
+  border-radius: 8px;
+  height: 240px;
+  padding: 8px;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-chart .chart-surface {
+  height: 300px;
 }
 
 .chart-host {
   width: 100%;
   height: 100%;
-  min-height: 252px;
 }
 
 canvas {
   width: 100% !important;
   height: 100% !important;
-  min-height: 252px;
+}
+
+.main-chart canvas {
+  height: 280px !important;
 }
 
 ion-badge {
-  font-size: 12px;
-  padding: 6px 10px;
+  font-size: 11px;
+  padding: 5px 10px;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .secondary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
-  ion-badge {
-    font-size: 11px;
-    padding: 5px 8px;
-  }
-}
-
-@media (max-width: 480px) {
-  ion-badge {
-    font-size: 10px;
-    padding: 4px 7px;
-  }
-}
-
-/* Responsive design */
-
-/* Desktop Grande */
-@media (min-width: 1440px) {
-  .dashboard-container {
-    padding: 32px;
-  }
-}
-
-/* Tablet y Desktop Pequeño */
-@media (max-width: 1200px) {
   .quick-stats {
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
   }
   
-  .row-main {
+  .secondary-grid {
     grid-template-columns: 1fr;
   }
   
-  .chart-large {
-    min-height: 320px;
-  }
-}
-
-/* Tablet */
-@media (max-width: 992px) {
   .dashboard-container {
-    padding: 20px;
+    padding: 16px;
   }
   
-  .row-secondary {
-    grid-template-columns: 1fr;
-  }
-  
-  .stat-card {
-    padding: 18px;
-  }
-  
-  .stat-icon {
-    width: 52px;
-    height: 52px;
+  .stat-value {
     font-size: 26px;
   }
   
-  .stat-value {
-    font-size: 20px;
+  .stat-label {
+    font-size: 10px;
   }
 }
 
-/* Mobile Grande */
-@media (max-width: 768px) {
-  .dashboard-container {
-    padding: 16px;
-  }
-  
+@media (max-width: 480px) {
   .quick-stats {
     grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  
-  .stat-card {
-    padding: 16px;
-    gap: 12px;
-  }
-  
-  .stat-icon {
-    width: 48px;
-    height: 48px;
-    font-size: 24px;
-  }
-  
-  .stat-label {
-    font-size: 12px;
-  }
-  
-  .stat-value {
-    font-size: 18px;
-  }
-  
-  .row {
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-  
-  .chart-card {
-    padding: 20px;
-  }
-  
-  .card-header h3 {
-    font-size: 16px;
-  }
-  
-  .chart-surface {
-    min-height: 220px;
-  }
-  
-  .chart-large {
-    min-height: 280px;
-  }
-}
-
-/* Mobile Pequeño */
-@media (max-width: 480px) {
-  .dashboard-container {
-    padding: 12px;
-  }
-  
-  .quick-stats {
-    gap: 10px;
-  }
-  
-  .stat-card {
-    padding: 14px;
-    gap: 10px;
-  }
-  
-  .stat-icon {
-    width: 44px;
-    height: 44px;
-    font-size: 22px;
-  }
-  
-  .stat-value {
-    font-size: 16px;
-  }
-  
-  .chart-card {
-    padding: 16px;
-  }
-  
-  .card-header h3 {
-    font-size: 15px;
-  }
-  
-  .chart-surface {
-    min-height: 200px;
   }
 }
 </style>

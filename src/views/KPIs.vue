@@ -24,13 +24,20 @@
               <ion-item slot="header" class="accordion-header">
                 <ion-label>
                   <h3>Tasa de Conversión</h3>
-                  <p>Porcentaje de visitantes que realizan compras</p>
+                  <p>Objetivo SMART: Aumentar la tasa de conversión del 18% al 25% en 6 meses (Dic 2026)</p>
                 </ion-label>
               </ion-item>
               <div class="accordion-content" slot="content">
                 <div class="kpi-card">
-                  <div class="kpi-placeholder">
-                    <span class="placeholder-text">Gráfico de conversión</span>
+                  <div class="kpi-objective">
+                    <div class="objective-item"><strong>Específico:</strong> Incrementar conversión de visitantes a compradores</div>
+                    <div class="objective-item"><strong>Medible:</strong> De 18% a 25% (+7 puntos porcentuales)</div>
+                    <div class="objective-item"><strong>Alcanzable:</strong> Mediante optimización UX y checkout simplificado</div>
+                    <div class="objective-item"><strong>Relevante:</strong> Impacta directamente en ingresos sin aumentar tráfico</div>
+                    <div class="objective-item"><strong>Temporal:</strong> 6 meses (Julio - Diciembre 2026)</div>
+                  </div>
+                  <div class="chart-container">
+                    <canvas ref="conversionChart"></canvas>
                   </div>
                 </div>
               </div>
@@ -40,13 +47,20 @@
               <ion-item slot="header" class="accordion-header">
                 <ion-label>
                   <h3>Valor Promedio del Pedido (AOV)</h3>
-                  <p>Ingreso medio por transacción</p>
+                  <p>Objetivo SMART: Incrementar AOV de €45 a €60 en 4 meses (Sep 2026)</p>
                 </ion-label>
               </ion-item>
               <div class="accordion-content" slot="content">
                 <div class="kpi-card">
-                  <div class="kpi-placeholder">
-                    <span class="placeholder-text">Gráfico de valor promedio</span>
+                  <div class="kpi-objective">
+                    <div class="objective-item"><strong>Específico:</strong> Aumentar el ticket promedio por pedido</div>
+                    <div class="objective-item"><strong>Medible:</strong> De €45 a €60 (+€15, +33%)</div>
+                    <div class="objective-item"><strong>Alcanzable:</strong> Con cross-selling, bundles y descuentos por volumen</div>
+                    <div class="objective-item"><strong>Relevante:</strong> Mejora rentabilidad y amortiza costos de envío</div>
+                    <div class="objective-item"><strong>Temporal:</strong> 4 meses (Mayo - Septiembre 2026)</div>
+                  </div>
+                  <div class="chart-container">
+                    <canvas ref="aovChart"></canvas>
                   </div>
                 </div>
               </div>
@@ -56,13 +70,20 @@
               <ion-item slot="header" class="accordion-header">
                 <ion-label>
                   <h3>Retención de Clientes</h3>
-                  <p>Clientes que vuelven a comprar</p>
+                  <p>Objetivo SMART: Aumentar retención mensual del 40% al 55% en 8 meses (Ene 2027)</p>
                 </ion-label>
               </ion-item>
               <div class="accordion-content" slot="content">
                 <div class="kpi-card">
-                  <div class="kpi-placeholder">
-                    <span class="placeholder-text">Gráfico de retención</span>
+                  <div class="kpi-objective">
+                    <div class="objective-item"><strong>Específico:</strong> Incrementar clientes que recompran en 30 días</div>
+                    <div class="objective-item"><strong>Medible:</strong> De 40% a 55% de retención mensual</div>
+                    <div class="objective-item"><strong>Alcanzable:</strong> Email marketing, programa de fidelidad y recordatorios</div>
+                    <div class="objective-item"><strong>Relevante:</strong> Cliente recurrente cuesta 5x menos que adquirir nuevo</div>
+                    <div class="objective-item"><strong>Temporal:</strong> 8 meses (Mayo 2026 - Enero 2027)</div>
+                  </div>
+                  <div class="chart-container">
+                    <canvas ref="retentionChart"></canvas>
                   </div>
                 </div>
               </div>
@@ -72,13 +93,20 @@
               <ion-item slot="header" class="accordion-header">
                 <ion-label>
                   <h3>Costo de Adquisición (CAC)</h3>
-                  <p>Inversión para adquirir nuevos clientes</p>
+                  <p>Objetivo SMART: Reducir CAC de €22 a €15 en 5 meses (Oct 2026)</p>
                 </ion-label>
               </ion-item>
               <div class="accordion-content" slot="content">
                 <div class="kpi-card">
-                  <div class="kpi-placeholder">
-                    <span class="placeholder-text">Gráfico de CAC</span>
+                  <div class="kpi-objective">
+                    <div class="objective-item"><strong>Específico:</strong> Disminuir costo promedio para adquirir cliente</div>
+                    <div class="objective-item"><strong>Medible:</strong> De €22 a €15 por cliente (-€7, -32%)</div>
+                    <div class="objective-item"><strong>Alcanzable:</strong> Optimización campañas, SEO orgánico y referidos</div>
+                    <div class="objective-item"><strong>Relevante:</strong> Mejora margen y permite escalar marketing</div>
+                    <div class="objective-item"><strong>Temporal:</strong> 5 meses (Mayo - Octubre 2026)</div>
+                  </div>
+                  <div class="chart-container">
+                    <canvas ref="cacChart"></canvas>
                   </div>
                 </div>
               </div>
@@ -88,13 +116,20 @@
               <ion-item slot="header" class="accordion-header">
                 <ion-label>
                   <h3>Tiempo de Vida del Cliente (LTV)</h3>
-                  <p>Valor total que genera un cliente</p>
+                  <p>Objetivo SMART: Aumentar LTV de €180 a €280 en 12 meses (May 2027)</p>
                 </ion-label>
               </ion-item>
               <div class="accordion-content" slot="content">
                 <div class="kpi-card">
-                  <div class="kpi-placeholder">
-                    <span class="placeholder-text">Gráfico de LTV</span>
+                  <div class="kpi-objective">
+                    <div class="objective-item"><strong>Específico:</strong> Incrementar valor total generado por cliente</div>
+                    <div class="objective-item"><strong>Medible:</strong> De €180 a €280 lifetime value (+€100, +56%)</div>
+                    <div class="objective-item"><strong>Alcanzable:</strong> Mejorando retención, frecuencia y ticket promedio</div>
+                    <div class="objective-item"><strong>Relevante:</strong> Ratio LTV/CAC óptimo permite crecimiento sostenible</div>
+                    <div class="objective-item"><strong>Temporal:</strong> 12 meses (Mayo 2026 - Mayo 2027)</div>
+                  </div>
+                  <div class="chart-container">
+                    <canvas ref="ltvChart"></canvas>
                   </div>
                 </div>
               </div>
@@ -115,13 +150,20 @@
               <ion-item slot="header" class="accordion-header">
                 <ion-label>
                   <h3>Tiempo de Carga de Página</h3>
-                  <p>Velocidad de respuesta de la aplicación</p>
+                  <p>Objetivo SMART: Reducir tiempo de carga de 3.2s a 1.5s en 3 meses (Ago 2026)</p>
                 </ion-label>
               </ion-item>
               <div class="accordion-content" slot="content">
                 <div class="kpi-card">
-                  <div class="kpi-placeholder">
-                    <span class="placeholder-text">Gráfico de tiempo de carga</span>
+                  <div class="kpi-objective">
+                    <div class="objective-item"><strong>Específico:</strong> Disminuir tiempo de carga inicial de página</div>
+                    <div class="objective-item"><strong>Medible:</strong> De 3.2s a 1.5s (-1.7s, -53%)</div>
+                    <div class="objective-item"><strong>Alcanzable:</strong> Lazy loading, CDN, optimización imágenes y código</div>
+                    <div class="objective-item"><strong>Relevante:</strong> Mejora UX y SEO, reduce tasa de rebote</div>
+                    <div class="objective-item"><strong>Temporal:</strong> 3 meses (Mayo - Agosto 2026)</div>
+                  </div>
+                  <div class="chart-container">
+                    <canvas ref="loadTimeChart"></canvas>
                   </div>
                 </div>
               </div>
@@ -131,13 +173,20 @@
               <ion-item slot="header" class="accordion-header">
                 <ion-label>
                   <h3>Tasa de Errores</h3>
-                  <p>Porcentaje de peticiones fallidas</p>
+                  <p>Objetivo SMART: Reducir error rate del 2.1% al 0.5% en 4 meses (Sep 2026)</p>
                 </ion-label>
               </ion-item>
               <div class="accordion-content" slot="content">
                 <div class="kpi-card">
-                  <div class="kpi-placeholder">
-                    <span class="placeholder-text">Gráfico de errores</span>
+                  <div class="kpi-objective">
+                    <div class="objective-item"><strong>Específico:</strong> Disminuir porcentaje de peticiones fallidas</div>
+                    <div class="objective-item"><strong>Medible:</strong> De 2.1% a 0.5% de error rate (-76%)</div>
+                    <div class="objective-item"><strong>Alcanzable:</strong> Monitoring, logs, tests automatizados y retry logic</div>
+                    <div class="objective-item"><strong>Relevante:</strong> Mejora confiabilidad y experiencia del usuario</div>
+                    <div class="objective-item"><strong>Temporal:</strong> 4 meses (Mayo - Septiembre 2026)</div>
+                  </div>
+                  <div class="chart-container">
+                    <canvas ref="errorRateChart"></canvas>
                   </div>
                 </div>
               </div>
@@ -147,13 +196,20 @@
               <ion-item slot="header" class="accordion-header">
                 <ion-label>
                   <h3>Disponibilidad del Sistema</h3>
-                  <p>Uptime y tiempo de actividad</p>
+                  <p>Objetivo SMART: Mantener uptime del 99.5% al 99.95% en 6 meses (Nov 2026)</p>
                 </ion-label>
               </ion-item>
               <div class="accordion-content" slot="content">
                 <div class="kpi-card">
-                  <div class="kpi-placeholder">
-                    <span class="placeholder-text">Gráfico de disponibilidad</span>
+                  <div class="kpi-objective">
+                    <div class="objective-item"><strong>Específico:</strong> Aumentar disponibilidad del servicio</div>
+                    <div class="objective-item"><strong>Medible:</strong> De 99.5% a 99.95% uptime (reducir downtime de 3.6h a 26min/mes)</div>
+                    <div class="objective-item"><strong>Alcanzable:</strong> Redundancia, load balancing, auto-scaling y DR plan</div>
+                    <div class="objective-item"><strong>Relevante:</strong> Garantiza servicio continuo y confianza del cliente</div>
+                    <div class="objective-item"><strong>Temporal:</strong> 6 meses (Mayo - Noviembre 2026)</div>
+                  </div>
+                  <div class="chart-container">
+                    <canvas ref="uptimeChart"></canvas>
                   </div>
                 </div>
               </div>
@@ -163,13 +219,20 @@
               <ion-item slot="header" class="accordion-header">
                 <ion-label>
                   <h3>Uso de Recursos del Servidor</h3>
-                  <p>CPU, Memoria y almacenamiento</p>
+                  <p>Objetivo SMART: Optimizar uso de CPU del 78% al 55% en 3 meses (Ago 2026)</p>
                 </ion-label>
               </ion-item>
               <div class="accordion-content" slot="content">
                 <div class="kpi-card">
-                  <div class="kpi-placeholder">
-                    <span class="placeholder-text">Gráfico de recursos</span>
+                  <div class="kpi-objective">
+                    <div class="objective-item"><strong>Específico:</strong> Reducir consumo promedio de CPU en servidores</div>
+                    <div class="objective-item"><strong>Medible:</strong> De 78% a 55% de uso CPU (-23 puntos)</div>
+                    <div class="objective-item"><strong>Alcanzable:</strong> Optimización queries, caching, code profiling</div>
+                    <div class="objective-item"><strong>Relevante:</strong> Reduce costos cloud y mejora escalabilidad</div>
+                    <div class="objective-item"><strong>Temporal:</strong> 3 meses (Mayo - Agosto 2026)</div>
+                  </div>
+                  <div class="chart-container">
+                    <canvas ref="cpuUsageChart"></canvas>
                   </div>
                 </div>
               </div>
@@ -179,13 +242,20 @@
               <ion-item slot="header" class="accordion-header">
                 <ion-label>
                   <h3>Cobertura de Tests</h3>
-                  <p>Porcentaje de código testeado</p>
+                  <p>Objetivo SMART: Aumentar cobertura del 62% al 85% en 5 meses (Oct 2026)</p>
                 </ion-label>
               </ion-item>
               <div class="accordion-content" slot="content">
                 <div class="kpi-card">
-                  <div class="kpi-placeholder">
-                    <span class="placeholder-text">Gráfico de cobertura</span>
+                  <div class="kpi-objective">
+                    <div class="objective-item"><strong>Específico:</strong> Incrementar porcentaje de código con tests</div>
+                    <div class="objective-item"><strong>Medible:</strong> De 62% a 85% de code coverage (+23 puntos)</div>
+                    <div class="objective-item"><strong>Alcanzable:</strong> Unit tests, integration tests, TDD practices</div>
+                    <div class="objective-item"><strong>Relevante:</strong> Reduce bugs en producción y facilita refactoring</div>
+                    <div class="objective-item"><strong>Temporal:</strong> 5 meses (Mayo - Octubre 2026)</div>
+                  </div>
+                  <div class="chart-container">
+                    <canvas ref="coverageChart"></canvas>
                   </div>
                 </div>
               </div>
@@ -213,6 +283,388 @@ import {
   IonIcon
 } from '@ionic/vue';
 import { briefcaseOutline, codeSlashOutline } from 'ionicons/icons';
+import { onMounted, ref } from 'vue';
+import Chart from 'chart.js/auto';
+
+// Refs para los canvas de los gráficos
+const conversionChart = ref(null);
+const aovChart = ref(null);
+const retentionChart = ref(null);
+const cacChart = ref(null);
+const ltvChart = ref(null);
+const loadTimeChart = ref(null);
+const errorRateChart = ref(null);
+const uptimeChart = ref(null);
+const cpuUsageChart = ref(null);
+const coverageChart = ref(null);
+
+onMounted(() => {
+  // KPI 1: Tasa de Conversión
+  if (conversionChart.value) {
+    new Chart(conversionChart.value, {
+      type: 'line',
+      data: {
+        labels: ['Mayo', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        datasets: [{
+          label: 'Tasa de Conversión (%)',
+          data: [18, 18.5, 19.5, 21, 22, 23.5, 24.5, 25],
+          borderColor: '#2196F3',
+          backgroundColor: 'rgba(33, 150, 243, 0.1)',
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'top' }
+        },
+        scales: {
+          y: { 
+            beginAtZero: false,
+            min: 15,
+            max: 28,
+            ticks: {
+              callback: function(value) {
+                return value + '%';
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // KPI 2: Valor Promedio del Pedido (AOV)
+  if (aovChart.value) {
+    new Chart(aovChart.value, {
+      type: 'bar',
+      data: {
+        labels: ['Mayo', 'Jun', 'Jul', 'Ago', 'Sep'],
+        datasets: [{
+          label: 'AOV (€)',
+          data: [45, 48, 52, 56, 60],
+          backgroundColor: '#6CB65C',
+          borderColor: '#6CB65C',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'top' }
+        },
+        scales: {
+          y: { 
+            beginAtZero: false,
+            min: 40,
+            max: 65,
+            ticks: {
+              callback: function(value) {
+                return '€' + value;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // KPI 3: Tasa de Retención
+  if (retentionChart.value) {
+    new Chart(retentionChart.value, {
+      type: 'line',
+      data: {
+        labels: ['Mayo', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic', 'Ene'],
+        datasets: [{
+          label: 'Retención (%)',
+          data: [40, 42, 45, 47, 49, 51, 53, 54, 55],
+          borderColor: '#9C27B0',
+          backgroundColor: 'rgba(156, 39, 176, 0.1)',
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'top' }
+        },
+        scales: {
+          y: { 
+            beginAtZero: false,
+            min: 35,
+            max: 60,
+            ticks: {
+              callback: function(value) {
+                return value + '%';
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // KPI 4: Coste de Adquisición de Cliente (CAC)
+  if (cacChart.value) {
+    new Chart(cacChart.value, {
+      type: 'line',
+      data: {
+        labels: ['Mayo', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct'],
+        datasets: [{
+          label: 'CAC (€)',
+          data: [22, 20, 18.5, 17.5, 16, 15],
+          borderColor: '#FF5722',
+          backgroundColor: 'rgba(255, 87, 34, 0.1)',
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'top' }
+        },
+        scales: {
+          y: { 
+            beginAtZero: false,
+            min: 10,
+            max: 25,
+            ticks: {
+              callback: function(value) {
+                return '€' + value;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // KPI 5: Valor del Tiempo de Vida del Cliente (LTV)
+  if (ltvChart.value) {
+    new Chart(ltvChart.value, {
+      type: 'bar',
+      data: {
+        labels: ['Mayo', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic', 'Ene', 'Feb', 'Mar', 'Abr', 'Mayo'],
+        datasets: [{
+          label: 'LTV (€)',
+          data: [180, 190, 205, 220, 235, 245, 255, 260, 265, 270, 275, 278, 280],
+          backgroundColor: '#4CAF50',
+          borderColor: '#4CAF50',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'top' }
+        },
+        scales: {
+          y: { 
+            beginAtZero: false,
+            min: 150,
+            max: 300,
+            ticks: {
+              callback: function(value) {
+                return '€' + value;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // KPI 6: Tiempo de Carga
+  if (loadTimeChart.value) {
+    new Chart(loadTimeChart.value, {
+      type: 'line',
+      data: {
+        labels: ['Mayo', 'Jun', 'Jul', 'Ago'],
+        datasets: [{
+          label: 'Tiempo de Carga (s)',
+          data: [3.2, 2.7, 2.1, 1.5],
+          borderColor: '#2196F3',
+          backgroundColor: 'rgba(33, 150, 243, 0.1)',
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'top' }
+        },
+        scales: {
+          y: { 
+            beginAtZero: false,
+            min: 0,
+            max: 4,
+            ticks: {
+              callback: function(value) {
+                return value + 's';
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // KPI 7: Tasa de Errores
+  if (errorRateChart.value) {
+    new Chart(errorRateChart.value, {
+      type: 'line',
+      data: {
+        labels: ['Mayo', 'Jun', 'Jul', 'Ago', 'Sep'],
+        datasets: [{
+          label: 'Error Rate (%)',
+          data: [2.1, 1.7, 1.3, 0.9, 0.5],
+          borderColor: '#FF5722',
+          backgroundColor: 'rgba(255, 87, 34, 0.1)',
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'top' }
+        },
+        scales: {
+          y: { 
+            beginAtZero: true,
+            max: 3,
+            ticks: {
+              callback: function(value) {
+                return value + '%';
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // KPI 8: Disponibilidad
+  if (uptimeChart.value) {
+    new Chart(uptimeChart.value, {
+      type: 'line',
+      data: {
+        labels: ['Mayo', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov'],
+        datasets: [{
+          label: 'Uptime (%)',
+          data: [99.5, 99.6, 99.7, 99.75, 99.8, 99.9, 99.95],
+          borderColor: '#4CAF50',
+          backgroundColor: 'rgba(76, 175, 80, 0.1)',
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'top' }
+        },
+        scales: {
+          y: { 
+            beginAtZero: false,
+            min: 99,
+            max: 100,
+            ticks: {
+              callback: function(value) {
+                return value + '%';
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // KPI 9: Uso de CPU
+  if (cpuUsageChart.value) {
+    new Chart(cpuUsageChart.value, {
+      type: 'bar',
+      data: {
+        labels: ['Mayo', 'Jun', 'Jul', 'Ago'],
+        datasets: [{
+          label: 'Uso CPU (%)',
+          data: [78, 70, 62, 55],
+          backgroundColor: '#9C27B0',
+          borderColor: '#9C27B0',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'top' }
+        },
+        scales: {
+          y: { 
+            beginAtZero: false,
+            min: 40,
+            max: 90,
+            ticks: {
+              callback: function(value) {
+                return value + '%';
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // KPI 10: Cobertura de Tests
+  if (coverageChart.value) {
+    new Chart(coverageChart.value, {
+      type: 'line',
+      data: {
+        labels: ['Mayo', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct'],
+        datasets: [{
+          label: 'Code Coverage (%)',
+          data: [62, 67, 72, 77, 82, 85],
+          borderColor: '#6CB65C',
+          backgroundColor: 'rgba(108, 182, 92, 0.1)',
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'top' }
+        },
+        scales: {
+          y: { 
+            beginAtZero: false,
+            min: 50,
+            max: 90,
+            ticks: {
+              callback: function(value) {
+                return value + '%';
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+});
 </script>
 
 <style scoped>
@@ -352,6 +804,46 @@ import { briefcaseOutline, codeSlashOutline } from 'ionicons/icons';
   color: #999999;
   font-size: 14px;
   font-weight: 500;
+}
+
+.kpi-objective {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(108, 182, 92, 0.05) 0%, rgba(33, 150, 243, 0.05) 100%);
+  border-left: 4px solid #6CB65C;
+  border-radius: 8px;
+}
+
+.objective-item {
+  padding: 10px 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #444444;
+}
+
+.objective-item:not(:last-child) {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.objective-item strong {
+  color: #6CB65C;
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.chart-container {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-container canvas {
+  max-width: 100%;
+  height: 280px !important;
 }
 
 /* Responsive design */
