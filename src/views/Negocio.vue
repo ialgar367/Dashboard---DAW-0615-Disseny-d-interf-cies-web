@@ -114,13 +114,87 @@
             </div>
           </div>
         </div>
+
+        <div class="custom-chart-row">
+          <div class="chart-card custom-chart-card">
+            <div class="card-header">
+              <h3>Indice de Salud Comercial (Grafico Propio)</h3>
+              <ion-badge color="tertiary">Sin libreria</ion-badge>
+            </div>
+            <div class="custom-chart-layout">
+              <svg viewBox="0 0 420 200" class="custom-health-chart" aria-label="Grafico propio de salud comercial">
+                <defs>
+                  <linearGradient id="healthArea" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#2f80ed" stop-opacity="0.26" />
+                    <stop offset="100%" stop-color="#2f80ed" stop-opacity="0.02" />
+                  </linearGradient>
+                </defs>
+                <line x1="30" y1="180" x2="390" y2="180" class="axis-line" />
+                <line x1="30" y1="20" x2="30" y2="180" class="axis-line" />
+                <polygon :points="customAreaPoints" fill="url(#healthArea)" />
+                <polyline :points="customTrendPoints" class="trend-line" />
+                <line
+                  :x1="activeCustomPoint.x"
+                  :x2="activeCustomPoint.x"
+                  y1="20"
+                  y2="180"
+                  class="active-guide"
+                />
+                <circle
+                  v-for="point in customPoints"
+                  :key="point.label"
+                  :cx="point.x"
+                  :cy="point.y"
+                  :r="activeCustomPoint.label === point.label ? 7 : 4.5"
+                  class="trend-point"
+                  :class="{ active: activeCustomPoint.label === point.label }"
+                  tabindex="0"
+                  role="button"
+                  @mouseenter="hoveredPointIndex = point.index"
+                  @focus="hoveredPointIndex = point.index"
+                />
+                <text
+                  :x="activeCustomPoint.x"
+                  :y="activeCustomPoint.y - 16"
+                  class="point-value-label"
+                  text-anchor="middle"
+                >{{ activeCustomPoint.value }}</text>
+              </svg>
+              <div class="custom-insights">
+                <div class="custom-insight-card">
+                  <span class="insight-kicker">Punto activo</span>
+                  <strong>{{ activeCustomPoint.label }}</strong>
+                  <span class="insight-value">{{ activeCustomPoint.value }}/100</span>
+                  <p>{{ activeCustomPoint.description }}</p>
+                </div>
+                <div class="custom-bars" @mouseleave="hoveredPointIndex = null">
+                  <div
+                    class="bar-item"
+                    v-for="bar in customBars"
+                    :key="bar.label"
+                    @mouseenter="hoveredPointIndex = bar.index"
+                  >
+                  <div class="bar-outer">
+                    <div
+                      class="bar-inner"
+                      :class="{ active: activeCustomPoint.label === bar.label }"
+                      :style="{ height: `${bar.height}px` }"
+                    ></div>
+                  </div>
+                  <span class="bar-label">{{ bar.label }}</span>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </ion-content>
   </ion-page>
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { 
   IonButtons, 
   IonContent, 
@@ -167,6 +241,45 @@ let mini1: Chart | null = null;
 let mini2: Chart | null = null;
 let mini3: Chart | null = null;
 let mini4: Chart | null = null;
+
+const customHealthData = [62, 68, 74, 71, 79, 84, 88];
+const customHealthLabels = ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'];
+const customHealthNotes = [
+  'Base estable con margen de mejora comercial.',
+  'Aumento sostenido tras reforzar trafico cualificado.',
+  'La conversion crece con mayor regularidad.',
+  'Ligera correccion sin afectar la tendencia general.',
+  'Buen equilibrio entre captacion y ventas cerradas.',
+  'Repunte claro apoyado por mejor ticket medio.',
+  'Maximo semanal con respuesta comercial muy positiva.',
+];
+const hoveredPointIndex = ref<number | null>(null);
+
+const customPoints = computed(() => customHealthData.map((value, index) => ({
+  index,
+  label: customHealthLabels[index],
+  value,
+  description: customHealthNotes[index],
+  x: 30 + (index * 60),
+  y: 180 - (value * 1.6),
+})));
+
+const activeCustomPoint = computed(() => customPoints.value[hoveredPointIndex.value ?? 4]);
+
+const customTrendPoints = computed(() => customPoints.value
+  .map((point) => `${point.x},${point.y}`)
+  .join(' '));
+
+const customAreaPoints = computed(() => `30,180 ${customTrendPoints.value} 390,180`);
+
+const customBars = computed(() => customPoints.value.map((point) => {
+  const height = point.value * 1.3;
+  return {
+    index: point.index,
+    label: point.label,
+    height,
+  };
+}));
 
 const buildSalesChart = () => {
   if (!salesChartRef.value) return;
@@ -594,25 +707,38 @@ onBeforeUnmount(() => {
 }
 
 .stat-icon {
-  font-size: 40px;
-  color: #e0e0e0;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
   z-index: 1;
 }
 
+.stat-icon ion-icon {
+  font-size: 30px;
+}
+
 .stat-card.stat-primary .stat-icon {
-  color: rgba(33, 150, 243, 0.2);
+  color: #2196f3;
+  background: rgba(33, 150, 243, 0.15);
 }
 
 .stat-card.stat-info .stat-icon {
-  color: rgba(156, 39, 176, 0.2);
+  color: #9c27b0;
+  background: rgba(156, 39, 176, 0.15);
 }
 
 .stat-card.stat-danger .stat-icon {
-  color: rgba(255, 87, 34, 0.2);
+  color: #ff5722;
+  background: rgba(255, 87, 34, 0.15);
 }
 
 .stat-card.stat-success .stat-icon {
-  color: rgba(76, 175, 80, 0.2);
+  color: #4caf50;
+  background: rgba(76, 175, 80, 0.15);
 }
 
 .mini-chart {
@@ -633,6 +759,156 @@ onBeforeUnmount(() => {
 
 .main-chart .chart-card {
   min-height: 350px;
+}
+
+.custom-chart-row {
+  margin-top: 16px;
+}
+
+.custom-chart-card {
+  min-height: 320px;
+}
+
+.custom-chart-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+.custom-insights {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.custom-insight-card {
+  padding: 14px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #f4f8ff 0%, #eef6ff 100%);
+  border: 1px solid #d8e6fb;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.insight-kicker {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #5d7fa6;
+  margin-bottom: 4px;
+}
+
+.custom-insight-card strong {
+  display: block;
+  font-size: 20px;
+  color: #1f3f66;
+}
+
+.insight-value {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #2f80ed;
+}
+
+.custom-insight-card p {
+  margin: 10px 0 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #4a617e;
+}
+
+.custom-health-chart {
+  width: 100%;
+  height: 220px;
+  background: linear-gradient(180deg, rgba(47, 128, 237, 0.06), rgba(47, 128, 237, 0));
+  border-radius: 10px;
+}
+
+.axis-line {
+  stroke: #c7d8ef;
+  stroke-width: 1.5;
+}
+
+.trend-line {
+  fill: none;
+  stroke: #2f80ed;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.active-guide {
+  stroke: rgba(47, 128, 237, 0.28);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+}
+
+.trend-point {
+  fill: #2f80ed;
+  stroke: #ffffff;
+  stroke-width: 2;
+  cursor: pointer;
+  transition: transform 0.18s ease, fill 0.18s ease;
+}
+
+.trend-point.active,
+.trend-point:hover,
+.trend-point:focus {
+  fill: #1459b8;
+}
+
+.point-value-label {
+  font-size: 12px;
+  font-weight: 700;
+  fill: #1459b8;
+}
+
+.custom-bars {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 8px;
+  height: 190px;
+}
+
+.bar-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.bar-outer {
+  width: 24px;
+  height: 160px;
+  border-radius: 999px;
+  background: #e7effa;
+  display: flex;
+  align-items: flex-end;
+  padding: 3px;
+}
+
+.bar-inner {
+  width: 100%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #2f80ed 0%, #56ccf2 100%);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+}
+
+.bar-inner.active {
+  transform: scaleX(1.08);
+  box-shadow: 0 10px 18px rgba(47, 128, 237, 0.22);
+}
+
+.bar-label {
+  font-size: 11px;
+  color: #5c6a7a;
+  font-weight: 600;
 }
 
 /* Secondary Grid */
@@ -721,6 +997,15 @@ ion-badge {
   
   .dashboard-container {
     padding: 16px;
+  }
+
+  .custom-chart-layout {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .custom-health-chart {
+    height: 200px;
   }
   
   .stat-value {

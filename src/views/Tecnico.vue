@@ -613,25 +613,38 @@ onBeforeUnmount(() => {
 }
 
 .stat-icon {
-  font-size: 40px;
-  color: #e0e0e0;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
   z-index: 1;
 }
 
+.stat-icon ion-icon {
+  font-size: 30px;
+}
+
 .stat-card.stat-primary .stat-icon {
-  color: rgba(33, 150, 243, 0.2);
+  color: #2196f3;
+  background: rgba(33, 150, 243, 0.15);
 }
 
 .stat-card.stat-success .stat-icon {
-  color: rgba(76, 175, 80, 0.2);
+  color: #4caf50;
+  background: rgba(76, 175, 80, 0.15);
 }
 
 .stat-card.stat-danger .stat-icon {
-  color: rgba(239, 83, 80, 0.2);
+  color: #ef5350;
+  background: rgba(239, 83, 80, 0.15);
 }
 
 .stat-card.stat-info .stat-icon {
-  color: rgba(156, 39, 176, 0.2);
+  color: #9c27b0;
+  background: rgba(156, 39, 176, 0.15);
 }
 
 .mini-chart {
