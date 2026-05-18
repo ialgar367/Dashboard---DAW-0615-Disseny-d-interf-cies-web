@@ -1,21 +1,24 @@
 import { mount } from '@vue/test-utils'
-import FolderPage from '@/views/FolderPage.vue'
+import Negocio from '@/views/Negocio.vue'
 import { describe, expect, test } from 'vitest'
 
-describe('FolderPage.vue', () => {
-  test('renders folder view', () => {
-    const mockRoute = {
-      params: {
-        id: 'Outbox'
-      }
-    }
-    const wrapper = mount(FolderPage, {
+describe('Negocio.vue', () => {
+  test('renders negocio dashboard', () => {
+    const wrapper = mount(Negocio, {
       global: {
-        mocks: {
-          $route: mockRoute
+        stubs: {
+          IonPage: true,
+          IonHeader: true,
+          IonToolbar: true,
+          IonButtons: true,
+          IonMenuButton: true,
+          IonTitle: true,
+          IonContent: true,
+          IonIcon: true,
+          IonBadge: true
         }
       }
     })
-    expect(wrapper.text()).toMatch('Explore UI Components')
+    expect(wrapper.text()).toMatch('Dashboard de Negocio')
   })
 })

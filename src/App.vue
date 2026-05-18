@@ -1,27 +1,30 @@
 <template>
   <ion-app>
     <ion-split-pane content-id="main-content">
-      <ion-menu content-id="main-content" type="overlay">
-        <ion-content>
-          <ion-list id="inbox-list">
-            <ion-list-header>Inbox</ion-list-header>
-            <ion-note>hi@ionicframework.com</ion-note>
+      <ion-menu content-id="main-content" type="overlay" class="custom-menu">
+        <ion-content class="menu-content">
+          <div class="menu-header">
+            <div class="logo-container">
+              <ion-icon :icon="analyticsOutline" class="logo-icon"></ion-icon>
+            </div>
+            <h1 class="app-title">Dashboard</h1>
+            <p class="app-subtitle">Visualització de Dades</p>
+          </div>
 
+          <ion-list class="menu-list">
             <ion-menu-toggle :auto-hide="false" v-for="(p, i) in appPages" :key="i">
-              <ion-item @click="selectedIndex = i" router-direction="root" :router-link="p.url" lines="none" :detail="false" class="hydrated" :class="{ selected: selectedIndex === i }">
+              <ion-item 
+                @click="selectedIndex = i" 
+                router-direction="root" 
+                :router-link="p.url" 
+                lines="none" 
+                :detail="false" 
+                class="menu-item"
+                :class="{ selected: selectedIndex === i }">
                 <ion-icon aria-hidden="true" slot="start" :ios="p.iosIcon" :md="p.mdIcon"></ion-icon>
                 <ion-label>{{ p.title }}</ion-label>
               </ion-item>
             </ion-menu-toggle>
-          </ion-list>
-
-          <ion-list id="labels-list">
-            <ion-list-header>Labels</ion-list-header>
-
-            <ion-item v-for="(label, index) in labels" lines="none" :key="index">
-              <ion-icon aria-hidden="true" slot="start" :ios="bookmarkOutline" :md="bookmarkSharp"></ion-icon>
-              <ion-label>{{ label }}</ion-label>
-            </ion-item>
           </ion-list>
         </ion-content>
       </ion-menu>
@@ -38,196 +41,217 @@ import {
   IonItem,
   IonLabel,
   IonList,
-  IonListHeader,
   IonMenu,
   IonMenuToggle,
-  IonNote,
   IonRouterOutlet,
   IonSplitPane,
 } from '@ionic/vue';
 import { ref } from 'vue';
 import {
-  archiveOutline,
-  archiveSharp,
-  bookmarkOutline,
-  bookmarkSharp,
-  heartOutline,
-  heartSharp,
-  mailOutline,
-  mailSharp,
-  paperPlaneOutline,
-  paperPlaneSharp,
-  trashOutline,
-  trashSharp,
-  warningOutline,
-  warningSharp,
+  analyticsOutline,
+  briefcaseOutline,
+  codeSlashOutline,
+  statsChartOutline,
 } from 'ionicons/icons';
 
 const selectedIndex = ref(0);
 const appPages = [
   {
-    title: 'Inbox',
-    url: '/folder/Inbox',
-    iosIcon: mailOutline,
-    mdIcon: mailSharp,
+    title: 'Negocio',
+    url: '/negocio',
+    iosIcon: briefcaseOutline,
+    mdIcon: briefcaseOutline,
   },
   {
-    title: 'Outbox',
-    url: '/folder/Outbox',
-    iosIcon: paperPlaneOutline,
-    mdIcon: paperPlaneSharp,
+    title: 'Técnico',
+    url: '/tecnico',
+    iosIcon: codeSlashOutline,
+    mdIcon: codeSlashOutline,
   },
   {
-    title: 'Favorites',
-    url: '/folder/Favorites',
-    iosIcon: heartOutline,
-    mdIcon: heartSharp,
-  },
-  {
-    title: 'Archived',
-    url: '/folder/Archived',
-    iosIcon: archiveOutline,
-    mdIcon: archiveSharp,
-  },
-  {
-    title: 'Trash',
-    url: '/folder/Trash',
-    iosIcon: trashOutline,
-    mdIcon: trashSharp,
-  },
-  {
-    title: 'Spam',
-    url: '/folder/Spam',
-    iosIcon: warningOutline,
-    mdIcon: warningSharp,
+    title: 'KPIs',
+    url: '/kpis',
+    iosIcon: statsChartOutline,
+    mdIcon: statsChartOutline,
   },
 ];
-const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
-const path = window.location.pathname.split('folder/')[1];
+const path = window.location.pathname;
 if (path !== undefined) {
-  selectedIndex.value = appPages.findIndex((page) => page.title.toLowerCase() === path.toLowerCase());
+  if (path.includes('/negocio')) selectedIndex.value = 0;
+  else if (path.includes('/tecnico')) selectedIndex.value = 1;
+  else if (path.includes('/kpis')) selectedIndex.value = 2;
 }
 </script>
 
 <style scoped>
-ion-menu ion-content {
-  --background: var(--ion-item-background, var(--ion-background-color, #fff));
+/* Custom Menu Styling */
+.custom-menu {
+  --width: 280px;
 }
 
-ion-menu.md ion-content {
-  --padding-start: 8px;
-  --padding-end: 8px;
-  --padding-top: 20px;
-  --padding-bottom: 20px;
+.menu-content {
+  --background: #ffffff;
 }
 
-ion-menu.md ion-list {
-  padding: 20px 0;
+.menu-header {
+  padding: 40px 24px 32px;
+  background: linear-gradient(135deg, #6CB65C 0%, #5a9e4c 100%);
+  text-align: center;
+  color: #ffffff;
 }
 
-ion-menu.md ion-note {
-  margin-bottom: 30px;
+.logo-container {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
 }
 
-ion-menu.md ion-list-header,
-ion-menu.md ion-note {
-  padding-left: 10px;
+.logo-icon {
+  font-size: 36px;
+  color: #ffffff;
 }
 
-ion-menu.md ion-list#inbox-list {
-  border-bottom: 1px solid var(--ion-background-color-step-150, #d7d8da);
+.app-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  color: #ffffff;
 }
 
-ion-menu.md ion-list#inbox-list ion-list-header {
-  font-size: 22px;
-  font-weight: 600;
-
-  min-height: 20px;
+.app-subtitle {
+  font-size: 14px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 400;
 }
 
-ion-menu.md ion-list#labels-list ion-list-header {
-  font-size: 16px;
-
-  margin-bottom: 18px;
-
-  color: #757575;
-
-  min-height: 26px;
+.menu-list {
+  padding: 24px 16px;
+  background: transparent;
 }
 
-ion-menu.md ion-item {
-  --padding-start: 10px;
-  --padding-end: 10px;
-  border-radius: 4px;
-}
-
-ion-menu.md ion-item.selected {
-  --background: rgba(var(--ion-color-primary-rgb), 0.14);
-}
-
-ion-menu.md ion-item.selected ion-icon {
-  color: var(--ion-color-primary);
-}
-
-ion-menu.md ion-item ion-icon {
-  color: #616e7e;
-}
-
-ion-menu.md ion-item ion-label {
-  font-weight: 500;
-}
-
-ion-menu.ios ion-content {
-  --padding-bottom: 20px;
-}
-
-ion-menu.ios ion-list {
-  padding: 20px 0 0 0;
-}
-
-ion-menu.ios ion-note {
-  line-height: 24px;
-  margin-bottom: 20px;
-}
-
-ion-menu.ios ion-item {
+.menu-item {
+  --background: transparent;
+  --color: #666666;
   --padding-start: 16px;
   --padding-end: 16px;
-  --min-height: 50px;
+  --inner-padding-end: 0;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  font-size: 15px;
+  transition: all 0.2s ease;
 }
 
-ion-menu.ios ion-item.selected ion-icon {
-  color: var(--ion-color-primary);
+.menu-item::part(native) {
+  border-radius: 12px;
 }
 
-ion-menu.ios ion-item ion-icon {
+.menu-item ion-icon {
   font-size: 24px;
-  color: #73849a;
+  margin-right: 16px;
+  color: #666666;
+  transition: color 0.2s ease;
 }
 
-ion-menu.ios ion-list#labels-list ion-list-header {
-  margin-bottom: 8px;
+.menu-item:hover {
+  --background: #f5f5f5;
 }
 
-ion-menu.ios ion-list-header,
-ion-menu.ios ion-note {
-  padding-left: 16px;
-  padding-right: 16px;
+.menu-item.selected {
+  --background: #e8f5e6;
+  --color: #6CB65C;
+  font-weight: 600;
 }
 
-ion-menu.ios ion-note {
-  margin-bottom: 8px;
+.menu-item.selected ion-icon {
+  color: #6CB65C;
 }
 
-ion-note {
-  display: inline-block;
-  font-size: 16px;
-
-  color: var(--ion-color-medium-shade);
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  ion-menu.md {
+    --width: 280px;
+  }
+  
+  .menu-header {
+    padding: 48px 24px 40px;
+  }
 }
 
-ion-item.selected {
-  --color: var(--ion-color-primary);
+@media (max-width: 767px) {
+  .custom-menu {
+    --width: 260px;
+  }
+  
+  .menu-header {
+    padding: 32px 20px 28px;
+  }
+  
+  .logo-container {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 12px;
+  }
+  
+  .logo-icon {
+    font-size: 32px;
+  }
+  
+  .app-title {
+    font-size: 22px;
+  }
+  
+  .app-subtitle {
+    font-size: 13px;
+  }
+  
+  .menu-list {
+    padding: 20px 12px;
+  }
+  
+  .menu-item {
+    --padding-start: 12px;
+    --padding-end: 12px;
+    font-size: 14px;
+  }
+  
+  .menu-item ion-icon {
+    font-size: 22px;
+    margin-right: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .custom-menu {
+    --width: 240px;
+  }
+  
+  .menu-header {
+    padding: 28px 16px 24px;
+  }
+  
+  .logo-container {
+    width: 52px;
+    height: 52px;
+  }
+  
+  .logo-icon {
+    font-size: 28px;
+  }
+  
+  .app-title {
+    font-size: 20px;
+  }
+  
+  .app-subtitle {
+    font-size: 12px;
+  }
 }
 </style>
